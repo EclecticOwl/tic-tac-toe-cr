@@ -24,6 +24,11 @@ end
 x = Player.new "X"
 o = Player.new "O"
 
+def board_input(player, position, board)
+    b_input = position.to_i - 1
+    
+    board[b_input] = player.marker
+end
 
 while true
     display(board)
@@ -36,3 +41,6 @@ while true
         break
     end
 end
+
+
+display(board)
