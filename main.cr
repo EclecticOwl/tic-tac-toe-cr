@@ -24,24 +24,24 @@ end
 x = Player.new "X"
 o = Player.new "O"
 
-def board_input(player, position, board)
-    if position == "1"
+def board_input(player, option, board)
+    if option == "1"
         board[0] = player.marker
-    elsif position == "2"
+    elsif option == "2"
         board[1] = player.marker
-    elsif position == "3"
+    elsif option == "3"
         board[2] = player.marker
-    elsif position == "4"
+    elsif option == "4"
         board[3] = player.marker
-    elsif position == "5"
+    elsif option == "5"
         board[4] = player.marker
-    elsif position == "6"
+    elsif option == "6"
         board[5] = player.marker
-    elsif position == "7"
+    elsif option == "7"
         board[6] = player.marker
-    elsif position == "8"
+    elsif option == "8"
         board[7] = player.marker
-    elsif position == "9"
+    elsif option == "9"
         board[8] = player.marker
     end
 end
@@ -71,15 +71,22 @@ end
 
 
 player_state = 0
+count = 0
 
 while true
+    if count == 9
+        break
+    end
+
     display(board)
     puts ""
+
     if player_state == 0
         puts "Player 1, Please select a choice between 1 - 9"
     else
         puts "Player 2, Please select a choice between 1 - 9"
     end
+
     u_input = gets
 
     if u_input == "q"
@@ -92,26 +99,31 @@ while true
         board_input(o, u_input, board)
     end
 
-    if (win_conditions(board) == true)
+    if win_conditions(board) == true
         break
     end
+
 
     if player_state == 0
         player_state = 1
     else
         player_state = 0
     end
+
+    count += 1
 end
 
-def game_winner(board, player_state)
+def game_winner(board, player_state, count)
     display(board)
 
-    if player_state == 0
-        puts "Player 1 Wins!"
+    if count == 9
+        puts "Draw!"
+    elsif player_state == 0
+        puts "Player 1 wins"
     else
-        puts "Player 2 Wins!"
+        puts "Player 2 wins"
     end
 end
 
 
-game_winner(board, player_state)
+game_winner(board, player_state, count)
